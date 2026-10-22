@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Manitoba Aerospace &amp; Defence concepts</title>
+<style>
+  :root {
+    --bg: #001D25; /* mode40 navy */
+    --glass: rgba(255, 255, 255, 0.07);
+    --line: rgba(255, 255, 255, 0.14);
+    --text: #f2f2f0;
+    --muted: #a3a7ae;
+    --ink: #1c1d21;
+    --ink-2: #6b6f77;
+    --gap: 28px;
+    --radius: 22px;
+    --below: 132px; /* set from the controls' real height in JS */
+    --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { height: 100%; background: var(--bg); color: var(--text); font-family: var(--font); -webkit-font-smoothing: antialiased; overflow: hidden; }
+  button, a { -webkit-tap-highlight-color: transparent; }
+
+  /* the live homepage, full width, scrolling inside a rounded box */
+  .frame {
+    position: fixed; inset: var(--gap) var(--gap) var(--below) var(--gap);
+    border-radius: var(--radius); overflow: hidden; background: #fff;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 24px 70px rgba(0, 0, 0, 0.45);
+    transition: inset .3s ease, border-radius .3s ease;
+  }
+  .frame iframe { display: block; width: 100%; height: 100%; border: 0; }
+
+  /* bottom row: About on the left, concept selector in the middle, full screen on the right */
+  .controls {
+    position: fixed; z-index: 10; left: var(--gap); right: var(--gap);
+    bottom: calc(var(--gap) + env(safe-area-inset-bottom));
+    display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px;
+    pointer-events: none;
+    transition: opacity .25s ease, transform .3s ease;
+  }
+  .controls > * { pointer-events: auto; }
+
+  .pill {
+    all: unset; box-sizing: border-box; cursor: pointer; height: 44px; padding: 0 16px;
+    pointer-events: auto; /* all: unset would inherit pointer-events: none from .controls */
+    display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
+    font: 600 13px/1 var(--font); color: var(--text); text-decoration: none;
+    background: var(--glass); border: 1px solid var(--line); border-radius: 999px;
+    -webkit-backdrop-filter: blur(22px) saturate(150%); backdrop-filter: blur(22px) saturate(150%);
+    transition: background-color .2s ease, border-color .2s ease;
+  }
+  .pill:hover { background: rgba(255, 255, 255, 0.14); border-color: rgba(255, 255, 255, 0.28); }
+  .pill svg { flex: none; }
+  .fs .i-close, body.is-full .fs .i-open { display: none; }
+  body.is-full .fs .i-close { display: block; }
+  .about { justify-self: start; }
+  .center { display: flex; align-items: center; gap: 10px; }
+  /* homepage or logo view of the chosen concept */
+  .views { display: grid; grid-template-rows: 1fr 1fr; gap: 3px; padding: 4px; height: 70px; box-sizing: border-box; background: var(--glass); border: 1px solid var(--line); border-radius: 20px; -webkit-backdrop-filter: blur(22px) saturate(150%); backdrop-filter: blur(22px) saturate(150%); }
+  .views button { all: unset; box-sizing: border-box; pointer-events: auto; cursor: pointer; padding: 0 14px; border-radius: 14px; font: 600 13px/1 var(--font); color: var(--muted); display: flex; align-items: center; justify-content: center; transition: background-color .2s ease, color .2s ease; }
+  .views button:hover { color: var(--text); background: rgba(255, 255, 255, 0.1); }
+  .views button[aria-pressed="true"] { background: #fff; color: var(--ink); }
+  .fs { justify-self: end; }
+  /* the full screen toggle stays put when the controls hide */
+  .fs { position: relative; z-index: 12; }
+
+  .dock {
+    display: flex; align-items: center; gap: 18px;
+    padding: 6px 18px 6px 6px;
+    background: var(--glass); border: 1px solid var(--line); border-radius: 20px;
+    -webkit-backdrop-filter: blur(22px) saturate(150%); backdrop-filter: blur(22px) saturate(150%);
+  }
+
+  /* concept tabs: one light segmented control, three equal tabs */
+  .tabs {
+    list-style: none; padding: 4px; display: grid; grid-template-columns: repeat(3, 212px); gap: 4px;
+    background: rgba(255, 255, 255, 0.9); border-radius: 15px;
+  }
+  .tabs button {
+    all: unset; box-sizing: border-box; cursor: pointer; width: 100%; height: 52px;
+    display: flex; align-items: center; gap: 10px; padding: 0 10px 0 6px; border-radius: 11px;
+    color: var(--ink); transition: background-color .2s ease, box-shadow .2s ease;
+  }
+  .tabs button:hover { background: rgba(0, 0, 0, 0.05); }
+  .tabs button[aria-current="true"] { background: #fff; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), 0 6px 16px rgba(0, 0, 0, 0.1); }
+  .tabs img { flex: none; width: 64px; height: 40px; object-fit: cover; border-radius: 7px; display: block; opacity: .75; transition: opacity .2s ease; }
+  .tabs button[aria-current="true"] img, .tabs button:hover img { opacity: 1; }
+  .tabs .num { display: block; font-size: 11px; color: #555960; }
+  .tabs .name { display: block; font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .tabs button > span { min-width: 0; }
+  .tabs button:focus-visible { outline-color: var(--ink); outline-offset: -2px; }
+
+  .credit { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+  .credit img { display: block; width: 26px; height: 26px; }
+  .credit b { display: block; font-size: 13px; font-weight: 600; color: var(--text); }
+  .credit span { display: block; font-size: 12px; color: var(--muted); margin-top: 1px; }
+
+  button:focus-visible, a:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+  /* full screen: the box fills the window, everything but the toggle steps aside */
+  body.is-full .frame { inset: 0; border-radius: 0; box-shadow: none; }
+  body.is-full .fs { background: rgba(0, 29, 37, 0.85); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35); }
+  body.is-full .center, body.is-full .about { opacity: 0; pointer-events: none; transform: translateY(12px); }
+  .center, .about { transition: opacity .25s ease, transform .3s ease; }
+
+  @media (max-width: 1480px) {
+    .pill .label { display: none; }
+    .pill { width: 44px; padding: 0; justify-content: center; }
+  }
+  @media (max-width: 1320px) { .dock .credit { display: none; } .dock { padding-right: 6px; } }
+  @media (max-width: 1180px) {
+    .tabs .name { font-size: 13px; }
+    .tabs { grid-template-columns: repeat(3, 168px); }
+    .tabs img { width: 48px; }
+  }
+  @media (max-width: 960px) {
+    :root { --gap: 12px; --radius: 16px; }
+    .controls { grid-template-columns: auto auto 1fr auto; grid-template-areas: "dock dock dock dock" "about views credit fs"; row-gap: 8px; column-gap: 8px; bottom: calc(var(--gap) + env(safe-area-inset-bottom)); }
+    .center { display: contents; }
+    .views { grid-area: views; grid-template-rows: none; grid-template-columns: auto auto; height: 40px; border-radius: 999px; padding: 3px; }
+    .views button { padding: 0 10px; font-size: 12px; border-radius: 999px; }
+    .dock { grid-area: dock; padding: 4px; border-radius: 16px; }
+    .about { grid-area: about; }
+    .fs { grid-area: fs; }
+    .dock .credit { display: none; }
+    .credit.compact { grid-area: credit; display: flex; justify-content: center; min-width: 0; }
+    .credit.compact span span { display: none; }
+    .credit.compact img { width: 20px; height: 20px; }
+    .credit.compact b { font-size: 12px; }
+    .credit.compact span { font-size: 11px; }
+    .tabs { width: 100%; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 3px; gap: 3px; border-radius: 12px; }
+    .tabs button { height: 48px; flex-direction: column; justify-content: center; gap: 3px; padding: 4px; }
+    .tabs img { width: 100%; height: 22px; border-radius: 5px; }
+    .tabs .num { display: none; }
+    .tabs .name { font-size: 11.5px; }
+    .pill { height: 40px; width: 40px; }
+  }
+  @media (min-width: 961px) { .credit.compact { display: none; } }
+  .rotate-hint { display: none; position: fixed; z-index: 5; left: 50%; transform: translateX(-50%); top: calc(var(--gap) + 16px); font: 600 12px/1 var(--font); color: var(--ink); background: rgba(255,255,255,.92); padding: 9px 14px; border-radius: 999px; white-space: nowrap; pointer-events: none; }
+  @media (max-width: 700px) and (orientation: portrait) { body.is-logo .rotate-hint { display: block; } }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+
+
+<div class="controls">
+  <a class="pill about" id="about" href="about.html" aria-label="About these concepts">
+    <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><circle cx="8" cy="8" r="6.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 7.2v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".95" fill="currentColor"/></svg>
+    <span class="label">About these concepts</span>
+  </a>
+  <div class="center">
+  <div class="views" role="group" aria-label="Show">
+    <button type="button" data-view="home" aria-pressed="true">Homepage</button>
+    <button type="button" data-view="logo" aria-pressed="false">Logo</button>
+  </div>
+
+  <nav class="dock" aria-label="Choose a concept">
+    <ol class="tabs">
+      <li><button type="button" data-target="concept-1" aria-current="true">
+        <img src="img/concept-1-thumb.jpg" alt="">
+        <span><span class="num">Concept 1</span><span class="name">11 degrees north</span></span>
+      </button></li>
+      <li><button type="button" data-target="concept-2" aria-current="false">
+        <img src="img/concept-2-thumb.jpg" alt="">
+        <span><span class="num">Concept 2</span><span class="name">Night ramp</span></span>
+      </button></li>
+      <li><button type="button" data-target="concept-3" aria-current="false">
+        <img src="img/concept-3-thumb.jpg" alt="">
+        <span><span class="num">Concept 3</span><span class="name">Keystone</span></span>
+      </button></li>
+    </ol>
+    <p class="credit"><img src="img/mode40-mark-white.svg" width="26" height="26" alt=""><span><b>Built by mode40</b><span>Strategy &amp; Creative</span></span></p>
+  </nav>
+  </div>
+
+  <p class="credit compact" aria-hidden="true"><img src="img/mode40-mark-white.svg" width="20" height="20" alt=""><span><b>Built by mode40</b><span>Strategy &amp; Creative</span></span></p>
+
+  <button type="button" class="pill fs" id="fs" aria-pressed="false" aria-label="Full screen">
+    <svg class="i-open" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <svg class="i-close" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M6 2v4H2M14 6h-4V2M10 14v-4h4M2 10h4v4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span class="label">Full screen</span>
+  </button>
+</div>
+
+<div class="frame"><iframe id="view" src="concept-1/" title="Manitoba Aerospace &amp; Defence concept"></iframe></div>
+<p class="rotate-hint" aria-hidden="true">Turn your phone sideways to see the logo board</p>
+
+<script>
+  const view = document.getElementById('view');
+  const fs = document.getElementById('fs');
+  const about = document.getElementById('about');
+  const buttons = [...document.querySelectorAll('.tabs button')];
+  const ids = buttons.map(b => b.dataset.target);
+
+  const viewBtns = [...document.querySelectorAll('.views button')];
+  let mode = 'home';
+  function show(id, push) {
+    if (!ids.includes(id)) id = ids[0];
+    const src = id + '/' + (mode === 'logo' ? 'logo-sheet.html' : '');
+    if (!view.src.endsWith(src)) view.src = src;
+    buttons.forEach(b => b.setAttribute('aria-current', String(b.dataset.target === id)));
+    viewBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === mode)));
+    about.href = 'about.html#' + id + (mode === 'logo' ? '-logo' : '');
+    document.body.classList.toggle('is-logo', mode === 'logo');
+    if (push) history.replaceState(null, '', '#' + id + (mode === 'logo' ? '-logo' : ''));
+  }
+  const current = () => buttons.find(b => b.getAttribute('aria-current') === 'true').dataset.target;
+  viewBtns.forEach(b => b.addEventListener('click', () => { mode = b.dataset.view; show(current(), true); }));
+
+  // the logo sheets are fixed 1920x1080 boards: scale to fit, centre, letterbox in the board's own colour
+  function fitSheet() {
+    const doc = view.contentDocument;
+    if (mode !== 'logo' || !doc || !doc.body) return;
+    const z = Math.min(view.clientWidth / 1920, view.clientHeight / 1080);
+    const b = doc.body, bg = getComputedStyle(b).backgroundColor;
+    Object.assign(b.style, { zoom: z, width: '1920px', height: '1080px', margin: '0', overflow: 'hidden', position: 'absolute',
+      left: ((view.clientWidth / z - 1920) / 2) + 'px', top: ((view.clientHeight / z - 1080) / 2) + 'px' });
+    Object.assign(doc.documentElement.style, { background: bg === 'rgba(0, 0, 0, 0)' ? '#0b0c0e' : bg, height: '100%', overflow: 'hidden' });
+  }
+  view.addEventListener('load', fitSheet);
+  new ResizeObserver(fitSheet).observe(view);
+
+  // Escape leaves full screen even when focus is inside the concept page
+  view.addEventListener('load', () => {
+    try { view.contentDocument.addEventListener('keydown', e => { if (e.key === 'Escape') setFull(false); }); } catch (e) {}
+  });
+
+  // a little room under each mockup's footer so the controls never cover the end of the page
+  view.addEventListener('load', () => {
+    const doc = view.contentDocument;
+    if (!doc || !doc.body || mode === 'logo') return;
+    const last = [...doc.body.children].reverse().find(el => !['SCRIPT', 'STYLE'].includes(el.tagName));
+    const pad = doc.createElement('div');
+    pad.setAttribute('aria-hidden', 'true');
+    pad.style.height = '24px';
+    pad.style.background = last ? getComputedStyle(last).backgroundColor : 'transparent';
+    doc.body.appendChild(pad);
+  });
+
+  const controls = document.querySelector('.controls');
+  function fitBand() {
+    const gap = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--gap')) || 28;
+    document.documentElement.style.setProperty('--below', (controls.offsetHeight + gap * 2) + 'px');
+  }
+  new ResizeObserver(fitBand).observe(controls);
+  addEventListener('resize', fitBand);
+  fitBand();
+
+  // one toggle in one place: Full screen in, Exit full screen out
+  function setFull(on) {
+    document.body.classList.toggle('is-full', on);
+    document.querySelectorAll('.center, .about').forEach(el => { el.inert = on; });
+    fs.setAttribute('aria-pressed', String(on));
+    fs.setAttribute('aria-label', on ? 'Exit full screen' : 'Full screen');
+    fs.querySelector('.label').textContent = on ? 'Exit full screen' : 'Full screen';
+  }
+  fs.addEventListener('click', () => setFull(!document.body.classList.contains('is-full')));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setFull(false); });
+
+  buttons.forEach(b => b.addEventListener('click', () => show(b.dataset.target, true)));
+  if (/-logo$/.test(location.hash)) mode = 'logo';
+  show(location.hash.slice(1).replace(/-logo$/, ''), false);
+  addEventListener('hashchange', () => { mode = /-logo$/.test(location.hash) ? 'logo' : 'home'; show(location.hash.slice(1).replace(/-logo$/, ''), false); });
+</script>
+</body>
+</html>

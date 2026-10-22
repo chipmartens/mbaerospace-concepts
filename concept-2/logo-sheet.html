@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Logo sheet | Manitoba Aerospace &amp; Defence, concept 2</title>
+<style>
+@font-face{font-family:"Archivo";src:url(fonts/Archivo-var.woff2) format("woff2");font-weight:100 900;font-stretch:62% 125%}
+@font-face{font-family:"Manrope";src:url(fonts/Manrope-var.woff2) format("woff2");font-weight:200 800}
+:root{--ink:#0C151C;--ink-2:#121F28;--ice:#EDF1F3;--amber:#F0A43A;--steel:#5B6872}
+*{box-sizing:border-box}
+body{margin:0;width:1920px;height:1080px;overflow:hidden;background:var(--ink);font:400 15px/1.45 "SF Pro Text",-apple-system,"Manrope",sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+.sheet{display:grid;grid-template-columns:760px 1fr;height:1080px}
+.hero{background:var(--ink);color:#fff;padding:56px 64px;display:grid;grid-template-rows:auto 1fr auto}
+.hero h1{margin:0;font-size:15px;font-weight:500;color:rgba(255,255,255,.7)}
+.hero h1 b{display:block;color:#fff;font-family:"Archivo";font-weight:500;font-stretch:112%;letter-spacing:-.02em;font-size:28px;line-height:1.15;margin-bottom:6px}
+.big{align-self:center;justify-self:center;width:540px}
+.idea{margin:0;font-family:"Archivo";font-weight:500;font-stretch:112%;letter-spacing:-.02em;font-size:25px;line-height:1.25;text-wrap:balance}
+.idea small{display:block;margin-top:16px;font-family:"SF Pro Text",-apple-system,"Manrope",sans-serif;font-stretch:100%;letter-spacing:0;font-size:15px;line-height:1.5;color:rgba(255,255,255,.72);font-weight:400}
+.tiles{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,1fr);gap:2px;background:var(--ink)}
+.t{position:relative;display:grid;place-items:center;padding:40px;overflow:hidden}
+.t .lab{position:absolute;left:28px;bottom:22px;font-size:13px;color:var(--steel)}
+.t.dark .lab{color:rgba(255,255,255,.72)}
+.t.photo .lab{color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.8)}
+.white{background:#fff}.ice{background:var(--ice)}.dark{background:var(--ink-2)}.amber{background:var(--amber)}.amber .lab{color:rgba(12,21,28,.75)}
+.photo{background:url(img/hero-cc130j-night-1600.webp) center 40%/cover}
+
+.hdr{position:absolute;left:0;right:0;top:0;height:84px;display:flex;align-items:center;justify-content:space-between;padding:0 28px}
+.pillx{background:#F0A43A;color:#0C151C;border-radius:999px;height:40px;padding:0 18px;display:inline-flex;align-items:center;font-size:14px;font-weight:500}
+.m4 .pair{display:flex;align-items:center;gap:22px;background:#fff;padding:12px 18px;border-radius:2px}
+.m4 b{font-family:"Archivo";font-weight:500;font-stretch:112%;font-size:24px;line-height:1;color:#0C151C}
+.clear{position:relative;padding:34px;outline:1px solid var(--amber)}
+.clear::after{content:"";position:absolute;inset:34px;outline:1px dashed rgba(12,21,28,.35)}
+.clear em{position:absolute;top:6px;left:8px;font-style:normal;font-size:12px;color:#8A5A12}
+.sizes{display:flex;align-items:flex-end;gap:36px}
+.sizes figure{margin:0;display:grid;justify-items:center;gap:10px;font-size:12px;color:rgba(12,21,28,.8)}
+.min{font-size:13px;color:var(--steel);margin-top:14px;text-align:center}
+</style>
+</head>
+<body>
+<div class="sheet">
+  <section class="hero">
+    <h1><b>Manitoba Aerospace &amp; Defence</b>Concept 2, logo: horizon and climb</h1>
+    <img class="big" src="logo/mark.svg" alt="The horizon and climb mark">
+    <p class="idea">One long level line, the prairie horizon, and an apex climbing out of its right third. No letters to misread: the flattest horizon in the country, and the industry that climbs out of it.
+      <small>One stroke weight, terminals cut level, the line doubles as the wordmark’s baseline in the lockup. Set beside the full name in Archivo at 112 percent width, Medium, outlined to paths. Amber #F0A43A on Polar #0C151C.</small></p>
+  </section>
+  <section class="tiles">
+    <div class="t white"><img src="logo/primary.svg" alt="Primary horizontal lockup" style="width:470px"><span class="lab">Primary, on white</span></div>
+    <div class="t ice"><img src="logo/stacked.svg" alt="Stacked lockup" style="height:220px"><span class="lab">Stacked</span></div>
+    <div class="t dark"><img src="logo/primary-reversed.svg" alt="Reversed lockup" style="width:470px"><span class="lab">Reversed, on Polar</span></div>
+    <div class="t photo"><div class="hdr"><img src="logo/primary-reversed.svg" alt="Reversed lockup at header size" style="height:36px"><span class="pillx">Find a supplier</span></div><span class="lab">At real header size (36 px) on the hero photograph</span></div>
+    <div class="t white"><div><div class="clear"><em>clear space = mark stroke × 2</em><img src="logo/primary.svg" alt="Lockup with its clear space" style="width:380px;display:block"></div><p class="min">Minimum width: lockup 140 px on screen, 30 mm in print. Mark alone: 16 px.</p></div><span class="lab">Clear space and minimum size</span></div>
+    <div class="t amber">
+      <div class="sizes">
+        <figure><img src="logo/favicon.svg" width="64" height="64" alt=""><span>64</span></figure>
+        <figure><img src="logo/favicon.svg" width="32" height="32" alt=""><span>32</span></figure>
+        <figure><img src="logo/favicon.svg" width="16" height="16" alt=""><span>16</span></figure>
+        <figure class="m4"><span class="pair"><img src="logo/mark.svg" style="height:24px" alt="Mark at 24 px"><b>M4</b></span><span>M4 test at 24 px: no letters to misread</span></figure>
+      </div>
+      <span class="lab">Favicon at 64, 32 and 16 px; the M4 test</span>
+    </div>
+  </section>
+</div>
+</body>
+</html>

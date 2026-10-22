@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Brand sheet, concept 1: Eleven degrees north</title>
+<link rel="icon" href="logo/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+<style>
+body { width: 1920px; height: 1080px; overflow: hidden; display: grid; grid-template-columns: 600px 1fr 1fr; grid-template-rows: 540px 540px; }
+.c { overflow: hidden; padding: 44px 48px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); position: relative; display: flex; flex-direction: column; }
+.c > small { font-size: 13px; color: var(--muted); display: block; margin-bottom: 28px; }
+.logo { grid-row: span 2; justify-content: space-between; }
+.logo .m { width: 250px; }
+.logo p { font: 400 23px/1.22 var(--display); letter-spacing: -.02em; max-width: 460px; }
+.logo p span { color: var(--accent); }
+.type .spec { font: 400 92px/.92 var(--display); letter-spacing: -.035em; color: var(--accent); margin: 0; }
+.type .spec2 { font: 400 32px/1.05 var(--display); letter-spacing: -.025em; margin: 18px 0 0; }
+.type .body { margin-top: 14px; margin-bottom: 18px; font-size: 15px !important; color: var(--muted); max-width: 30em; font-size: 17px; }
+.type dl { margin: 0; display: grid; grid-template-columns: 150px 1fr; gap: 6px 16px; font-size: 14px; }
+.type dt { color: var(--muted); }
+.type dd { margin: 0; }
+.colours { padding: 0; display: grid; grid-template-columns: 2.2fr 1fr 1fr 1fr; }
+.sw { padding: 28px 22px; font-size: 13px !important; display: flex; flex-direction: column; justify-content: flex-end; font-size: 14px; }
+.sw b { font: 400 26px/1 var(--display); letter-spacing: -.02em; display: block; margin-bottom: 8px; }
+.img .pair { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; height: 250px; }
+.img .pair img { width: 100%; height: 100%; object-fit: cover; }
+.img ul { margin: 18px 0 0; padding: 0 0 0 18px; color: var(--muted); font-size: 14px; display: grid; gap: 4px; }
+.comp .demo-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.comp .find { margin-top: 36px; }
+.comp .proof { margin-top: auto; }
+</style>
+</head>
+<body>
+  <section class="c logo">
+    <small>Logo</small>
+    <img class="m" src="logo/mark-reversed.svg" alt="Mark">
+    <img src="logo/primary-reversed.svg" alt="Primary lockup" style="width:440px">
+    <p>Manitoba as a map: <span>its real outline, cut at each parallel from 50°N to 59°N.</span> Under 32 px the cuts close into the solid province.</p>
+  </section>
+  <section class="c type">
+    <small>Type: Switzer Regular for display and wordmark (ITF Free Font License). SF Pro Text for body, Manrope as fallback.</small>
+    <p class="spec">Tested here.</p>
+    <p class="spec2">One weight, tracked minus 3 percent.</p>
+    <p class="body">Body and interface in SF Pro Text at 17 px, line height 1.55. Numbers in tabular figures. Sentence case everywhere, no letterspaced capitals, no mono labels.</p>
+    <dl>
+      <dt>Display</dt><dd>Switzer 400, 80 to 100 px, line height 0.96</dd>
+      <dt>Statement</dt><dd>Switzer 400, 30 to 50 px</dd>
+      <dt>Body</dt><dd>SF Pro Text 400, 17 px</dd>
+      <dt>Small</dt><dd>SF Pro Text 400, 13 to 14 px</dd>
+    </dl>
+  </section>
+  <section class="c comp">
+    <small>Components: one button shape, and the capability search</small>
+    <div class="demo-btns">
+      <a class="btn btn-accent" href="#">Join</a>
+      <a class="btn btn-line" href="#">Conference details <svg class="arrow" viewBox="0 0 14 10" aria-hidden="true"><path d="M0 5h12.5M8.5 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
+    </div>
+    <form class="find" onsubmit="return false">
+      <label for="q">Find a Manitoba supplier by capability</label>
+      <div class="find-row"><input id="q" placeholder="Engine overhaul, composites, training" value="engine overhaul"><button class="find-go" type="button">Search <svg class="arrow" viewBox="0 0 14 10" aria-hidden="true"><path d="M0 5h12.5M8.5 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button></div>
+      <div class="results show"><p class="tag">Sample data from member profiles</p><ol><li><a href="#"><b>StandardAero</b><span>Engine overhaul: CF34, CFM56, CC-130, CP-140</span></a></li><li><a href="#"><b>KF Aerospace</b><span>Aircraft maintenance, leasing and defence training</span></a></li></ol></div>
+    </form>
+  </section>
+  <section class="c colours">
+    <div class="sw" style="background:#9CFF3F;color:#0B0C0E"><b>557 Green</b>#9CFF3F. The 557.7 nm oxygen line that turns the aurora over Churchill green. Hero type, statements and the primary button. Never a full field.</div>
+    <div class="sw" style="background:#0B0C0E;color:#ECEEF0;box-shadow:inset 1px 0 0 rgba(236,238,240,.12)"><b>Graphite</b>#0B0C0E ground<br>#131518 panel</div>
+    <div class="sw" style="background:#E3E6E9;color:#0B0C0E"><b>Hoarfrost</b>#E3E6E9 light field<br>#4A5058 text</div>
+    <div class="sw" style="background:#ECEEF0;color:#0B0C0E"><b>Signal</b>#ECEEF0 text on dark<br>#A3A9B0 muted</div>
+  </section>
+  <section class="c img">
+    <small>Imagery: real hardware, real light, never a filter</small>
+    <div class="pair">
+      <img src="img/engine-1600.webp" alt="Engine in a test cell">
+      <img src="img/band-ct142-1400.webp" alt="CT-142 nose art, City of Winnipeg Squadron">
+    </div>
+    <ul>
+      <li>Hardware lit by its own light: flame, launch, work lamps. Dark rooms, no daylight stock.</li>
+      <li>One object per frame, shot close enough to read the metal.</li>
+      <li>Tone-only edits: burn distractions, pull magenta toward blue. No colour splash, no fake process effects.</li>
+      <li>Afterburner frames only where the story is fighter engines; otherwise crop to the hardware.</li>
+    </ul>
+  </section>
+</body>
+</html>

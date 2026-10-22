@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Page in progress | Manitoba Aerospace &amp; Defence</title>
+<link rel="icon" href="logo/favicon.svg" type="image/svg+xml">
+<style>
+@font-face{font-family:"Archivo";src:url(fonts/Archivo-var.woff2) format("woff2");font-weight:100 900;font-stretch:62% 125%;font-display:swap}
+@font-face{font-family:"Manrope";src:url(fonts/Manrope-var.woff2) format("woff2");font-weight:200 800;font-display:swap}
+:root{--ink:#0C151C;--amber:#F0A43A;--steel:#5B6872;--m:48px}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;background:var(--ink);color:#fff;font:400 17px/1.55 "SF Pro Text",-apple-system,BlinkMacSystemFont,"Manrope",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+header{height:84px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--m)}
+header img{height:40px;display:block}
+.pill{display:inline-flex;align-items:center;height:44px;padding:0 20px;border-radius:999px;background:var(--amber);color:var(--ink);font-weight:500;font-size:15px;text-decoration:none}
+main{flex:1;padding:12vh var(--m) 96px;max-width:1100px}
+h1{margin:0 0 24px;font-family:"Archivo",sans-serif;font-weight:500;font-stretch:112%;letter-spacing:-.03em;line-height:.98;font-size:clamp(40px,6vw,88px);text-wrap:balance}
+p{max-width:34em;color:rgba(255,255,255,.82);font-size:19px;margin:0 0 28px}
+.back{font-weight:500;text-decoration:underline;text-underline-offset:4px}
+footer{background:var(--amber);color:var(--ink);padding:28px var(--m);display:flex;flex-wrap:wrap;gap:10px 32px;font-size:15px}
+footer a{text-decoration:none}
+@media (max-width:760px){:root{--m:20px}header{height:64px}header img{height:30px}main{padding-top:64px}}
+</style>
+</head>
+<body>
+<header>
+  <a href="index.html" aria-label="Manitoba Aerospace and Defence, home"><img src="logo/primary-reversed.svg" alt="Manitoba Aerospace &amp; Defence"></a>
+  <a class="pill" href="index.html#search">Find a supplier</a>
+</header>
+<main>
+  <h1 id="t">This page is part of the full site.</h1>
+  <p>This concept shows the homepage only. The page you picked would carry the full content in the build. For anything now, call or email the team.</p>
+  <p><a class="back" href="index.html">Back to the homepage</a></p>
+</main>
+<footer>
+  <a href="tel:+12042722957">204-272-2957</a>
+  <a href="mailto:info@mbaerospace.ca">info@mbaerospace.ca</a>
+  <span>5 Donald Street, Unit 440, Winnipeg, Manitoba R3L 2T4</span>
+</footer>
+<script>
+var names={about:'About us',board:'Board of directors',land:'Land acknowledgement',workforce:'Workforce development',supplier:'Supplier and cluster development',innovation:'Innovation, research and technology',news:'News',jobs:'Job postings',publications:'Publications',defence:'Defence',aerospace:'Aerospace',space:'Space',members:'Member directory',member:'Member profile','all-stars':'All-Stars Awards Dinner','space-to-ground':'Defending Canada: From Space to Ground',aaim:'AAiM Day',careers:'Careers in aerospace'};
+var p=new URLSearchParams(location.search).get('p');
+if(names[p]){document.getElementById('t').textContent=names[p]+' is part of the full site.';document.title=names[p]+' | Manitoba Aerospace & Defence';}
+</script>
+</body>
+</html>

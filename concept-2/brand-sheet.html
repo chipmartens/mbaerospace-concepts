@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Brand sheet | Manitoba Aerospace &amp; Defence, concept 2</title>
+<style>
+@font-face{font-family:"Archivo";src:url(fonts/Archivo-var.woff2) format("woff2");font-weight:100 900;font-stretch:62% 125%}
+@font-face{font-family:"Manrope";src:url(fonts/Manrope-var.woff2) format("woff2");font-weight:200 800}
+:root{--ink:#0C151C;--ink-2:#121F28;--ice:#EDF1F3;--amber:#F0A43A;--steel:#5B6872;--rule:rgba(12,21,28,.16)}
+*{box-sizing:border-box}
+body{margin:0;width:1920px;height:1080px;overflow:hidden;background:#fff;color:var(--ink);font:400 15px/1.45 "SF Pro Text",-apple-system,"Manrope",sans-serif;-webkit-font-smoothing:antialiased}
+.d{font-family:"Archivo",sans-serif;font-weight:500;font-stretch:112%;letter-spacing:-.03em;line-height:.98}
+.g{display:grid;grid-template-columns:640px 640px 640px;grid-template-rows:500px 580px;height:1080px}
+section{position:relative;padding:44px 48px;overflow:hidden}
+h2{margin:0 0 26px;font-size:13px;font-weight:500;color:var(--steel)}
+.dark h2{color:rgba(255,255,255,.65)}
+.dark{background:var(--ink);color:#fff}
+.id img{width:470px;display:block;margin:34px 0 40px}
+.id p{margin:0;font-size:30px;max-width:16ch}
+.id small{display:block;margin-top:18px;font-size:14px;color:rgba(255,255,255,.7);max-width:40em}
+.type .aa{font-size:150px;line-height:.8;margin:0 0 20px}
+.type table{border-collapse:collapse;width:100%;font-size:14px}
+.type td{padding:8px 12px 8px 0;border-top:1px solid var(--rule);vertical-align:baseline}
+.type td:last-child{text-align:right;color:var(--steel)}
+.type .s1{font-size:22px}.type .s2{font-size:17px}
+.colour{background:var(--ice)}
+.sw{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.sw div{height:178px;padding:14px;display:flex;flex-direction:column;justify-content:flex-end;font-size:13px;line-height:1.35;border-radius:2px}
+.sw b{font-family:"Archivo";font-weight:500;font-stretch:112%;font-size:18px;letter-spacing:-.01em}
+.recipe{grid-column:1 / span 2;background:var(--ink-2);color:#fff;display:grid;grid-template-columns:1fr 1fr 300px;gap:18px;padding-right:48px}
+.recipe h2{position:absolute;left:48px;top:44px;color:rgba(255,255,255,.65)}
+.recipe figure{margin:56px 0 0;align-self:start}
+.recipe figure img{width:100%;display:block}
+.recipe figcaption{margin-top:10px;font-size:13px;color:rgba(255,255,255,.7)}
+.recipe ol{margin:56px 0 0;padding:0 0 0 20px;font-size:14px;line-height:1.5;color:rgba(255,255,255,.88)}
+.recipe ol li{margin-bottom:10px}
+.recipe ol b{color:#fff;font-weight:500}
+.comp{background:#fff}
+.comp .row{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;padding:16px 0 20px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-bottom:28px}
+.comp .row span.d{font-size:52px}
+.comp .row small{display:block;margin-top:8px;font-size:13px;color:var(--steel);font-family:"SF Pro Text",-apple-system,"Manrope",sans-serif;letter-spacing:0}
+.arrow{position:relative;height:2px;background:var(--ink)}
+.arrow::after{content:"";position:absolute;right:0;top:-6px;width:12px;height:12px;border-top:2px solid var(--ink);border-right:2px solid var(--ink);transform:rotate(45deg)}
+.btns{display:flex;gap:12px;align-items:center;margin-bottom:28px}
+.pill{display:inline-flex;align-items:center;height:44px;padding:0 20px;border-radius:999px;background:var(--amber);color:var(--ink);font-weight:500;font-size:15px}
+.pill.o{background:none;box-shadow:inset 0 0 0 1px var(--ink)}
+.search{background:var(--ink-2);color:#fff;padding:22px 24px 26px;border-radius:2px}
+.search .line{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid rgba(255,255,255,.55);padding-bottom:12px}
+.search .line span.d{font-size:30px;letter-spacing:-.02em}
+.search .line b{color:var(--amber);font-weight:500;font-size:15px}
+.search p{margin:14px 0 0;font-size:13px;color:rgba(255,255,255,.7)}
+.lab{position:absolute;right:48px;bottom:24px;font-size:12px;color:var(--steel)}
+</style>
+</head>
+<body>
+<div class="g">
+  <section class="dark id">
+    <h2>Concept 2, Night ramp</h2>
+    <img src="logo/primary-reversed.svg" alt="Manitoba Aerospace &amp; Defence logo">
+    <p class="d">Built in the cold. Shown working.</p>
+    <small>Full-bleed photography of the aircraft Manitoba builds, services and trains for, all graded to one night recipe. Giant type rows route each visitor. A full-width wordmark closes every page on Amber.</small>
+  </section>
+  <section class="type">
+    <h2>Type</h2>
+    <p class="aa d">Aa</p>
+    <table>
+      <tr><td class="d s1">Display: Archivo Medium</td><td>width 112, weight 500, −3%, leading 0.98</td></tr>
+      <tr><td class="d s2">Rows 96 / H1 62 / H2 54 / Statement 58</td><td>one weight for every display role</td></tr>
+      <tr><td>Body and UI, SF Pro Text 400 and 500, 17/1.55</td><td>fallback Manrope (OFL, self-hosted)</td></tr>
+      <tr><td>Captions 13: aircraft type only</td><td>sentence case everywhere</td></tr>
+    </table>
+  </section>
+  <section class="colour">
+    <h2>Colour</h2>
+    <div class="sw">
+      <div style="background:#0C151C;color:#fff"><b>Polar</b>#0C151C<br>ground, text</div>
+      <div style="background:#121F28;color:#fff"><b>Deep</b>#121F28<br>search band</div>
+      <div style="background:#F0A43A"><b>Amber</b>#F0A43A<br>mark, CTA, footer field</div>
+      <div style="background:#5B6872;color:#fff"><b>Steel</b>#5B6872<br>secondary text</div>
+      <div style="background:#fff;box-shadow:inset 0 0 0 1px rgba(12,21,28,.12)"><b>White</b>#FFFFFF<br>light ground</div>
+      <div style="background:#EDF1F3;box-shadow:inset 0 0 0 1px rgba(12,21,28,.12)"><b>Ice</b>#EDF1F3<br>events band</div>
+    </div>
+    <span class="lab">Amber on Polar 8.6:1. Steel on White 5.6:1.</span>
+  </section>
+  <section class="recipe">
+    <h2>Imagery recipe: Night ramp</h2>
+    <figure><img src="img/recipe-before.webp" alt="Ungraded photograph of a C-130 being de-iced"><figcaption>Before: source frame</figcaption></figure>
+    <figure><img src="img/recipe-after.webp" alt="The same photograph after the Night ramp grade"><figcaption>After: the same grade on every image</figcaption></figure>
+    <ol>
+      <li><b>Whole frame, one treatment.</b> Saturation to 42 percent across everything, so each photo keeps its own temperature. No subject left in colour.</li>
+      <li><b>Texture kept:</b> lifted blacks, gentle S-curve, local contrast, heavier grain in the shadows. Night skies lift toward the horizon, so aircraft sit in the scene.</li>
+      <li><b>Steel only in the shadows;</b> mids neutral grey, so airframes read as metal, not lavender.</li>
+      <li><b>Practical light stays warm:</b> apron floods, beacons, sodium lamps, pilot lights.</li>
+      <li><b>Subjects:</b> aircraft at night, at dusk and in winter, shown working, and the people who build them.</li>
+    </ol>
+  </section>
+  <section class="comp">
+    <h2>Components</h2>
+    <div class="row"><span><span class="d">Join the cluster</span><small>Routing row: giant type, hairline rules, a long arrow that runs out on hover</small></span><span class="arrow"></span></div>
+    <div class="btns"><span class="pill">Find a supplier</span><span class="pill o">See job postings</span></div>
+    <div class="search"><div class="line"><span class="d">composites</span><b>Search →</b></div><p>Supplier search, set as type on Deep, results as hairline rows. Sample data labelled.</p></div>
+  </section>
+</div>
+</body>
+</html>
