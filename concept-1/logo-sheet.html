@@ -13,9 +13,7 @@
 body { margin: 0; width: 1920px; height: 1080px; background: var(--ink); color: #ECEEF0; font: 400 16px/1.45 "SF Pro Text", -apple-system, "Manrope", sans-serif; display: grid; grid-template-columns: 760px 1fr; overflow: hidden; }
 .l { padding: 64px; display: flex; flex-direction: column; justify-content: space-between; border-right: 1px solid rgba(236,238,240,.12); }
 .l h1 { font: 400 22px/1.2 "Switzer", sans-serif; letter-spacing: -.01em; margin: 0; color: var(--muted); }
-.big { display: flex; align-items: flex-end; gap: 48px; }
-.big img { height: 560px; width: auto; }
-.lat { font-size: 13px; color: var(--muted); display: flex; flex-direction: column; justify-content: space-between; height: 572px; margin-bottom: -6px; font-variant-numeric: tabular-nums; }
+.big img { display: block; width: 100%; height: auto; }
 .l p.idea { font: 400 30px/1.18 "Switzer", sans-serif; letter-spacing: -.02em; margin: 0; max-width: 620px; }
 .l p.idea span { color: var(--accent); }
 .r { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: 1fr 1fr 1fr; }
@@ -43,27 +41,26 @@ body { margin: 0; width: 1920px; height: 1080px; background: var(--ink); color: 
   <section class="l">
     <h1>Manitoba Aerospace &amp; Defence. Logo, concept 1</h1>
     <div class="big">
-      <img src="logo/mark-reversed.svg" alt="The mark: eleven horizontal bars forming the outline of Manitoba">
-      <div class="lat" aria-hidden="true"><span>60°N</span><span>59°</span><span>58°</span><span>57°</span><span>56°</span><span>55°</span><span>54°</span><span>53°</span><span>52°</span><span>51°</span><span>50°</span><span>49°N</span></div>
+      <img src="logo/mark-reversed.svg" alt="The mark: a solid wing rising off a flat horizon bar">
     </div>
-    <p class="idea">Manitoba, as a map. <span>The real outline, from the 49th parallel to the 60th, cut at every degree between.</span> Hudson Bay on the northeast, the Ontario line climbing to meet it.</p>
+    <p class="idea">A wing rising off the horizon. <span>The industry lifting off the prairie.</span> One flat line for the land, one solid form leaving it.</p>
   </section>
   <section class="r">
     <div class="cell frost"><small>Primary, on light</small><img src="logo/primary.svg" alt="Primary lockup on light" style="width:440px"></div>
     <div class="cell"><small>Reversed, on graphite</small><img src="logo/primary-reversed.svg" alt="Reversed lockup on dark" style="width:440px"></div>
     <div class="cell photo"><small style="color:#ECEEF0">On photography: reversed, top left, over the darkest third</small><img src="logo/primary-reversed.svg" alt="Reversed lockup on a photo" style="width:360px"></div>
-    <div class="cell frost"><small>Clear space: one degree bar height x 3 on every side</small><span class="cs"><img src="logo/primary.svg" alt="Lockup with clear space"></span></div>
-    <div class="cell"><small>At use size: the header at 1440, mark 24 px, next to the plain Menu control. Then 64, 32 and 16 px.</small>
+    <div class="cell frost"><small>Clear space: the horizon bar height x 3 on every side</small><span class="cs"><img src="logo/primary.svg" alt="Lockup with clear space"></span></div>
+    <div class="cell"><small>At use size: the header at 1440, mark 33 px tall, next to the plain Menu control. Then 64, 32 and 16 px.</small>
       <div class="hdrtest"><img src="logo/primary-reversed-small.svg" alt="Header lockup" style="height:30px;width:auto"><span>Defence</span><span>Careers</span><span>Menu</span><b>Join</b></div>
       <div class="sizes">
-        <figure><img src="logo/mark-reversed.svg" width="64" height="64" alt=""><figcaption>64 px</figcaption></figure>
+        <figure><img src="logo/mark-reversed.svg" width="64" alt=""><figcaption>64 px</figcaption></figure>
         <figure><img src="logo/favicon.svg" width="32" height="32" alt=""><figcaption>32 px</figcaption></figure>
         <figure><img src="logo/favicon.svg" width="16" height="16" alt=""><figcaption>16 px favicon</figcaption></figure>
         
       </div>
     </div>
     <div class="cell acc"><small>Stacked, and one colour</small>
-      <div class="row"><img src="logo/stacked.svg" alt="Stacked lockup" style="height:150px;width:auto"><img src="logo/mono-black.svg" alt="One-colour lockup" style="width:230px"></div>
+      <div class="row"><img src="logo/stacked.svg" alt="Stacked lockup" style="height:150px;width:auto"><img src="logo/mono-black.svg" alt="One-colour lockup" style="width:190px"></div>
     </div>
   </section>
 </body>
