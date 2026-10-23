@@ -16,7 +16,10 @@
 
 :root{
   --carbon:#141618; --titanium:#A9ABA6; --frost:#E5EBEF; --hot:#DA6F2A; --ink-2:#4A4E52;
-  --m:24px; --band:24px;
+  --m:24px;
+  /* spacing scale (4px base): 8 12 16 24 32 48 64 96. Bands share one vertical padding, heads one gap to their body. */
+  --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:24px; --sp-6:32px; --sp-7:48px; --sp-8:64px; --sp-9:96px;
+  --band-y:clamp(72px,7.5vw,120px); --band:var(--band-y) var(--m); --head-gap:var(--sp-7);
   --display:"Manrope",ui-sans-serif,system-ui,sans-serif;
   --serif:"Source Serif 4",Georgia,serif;
   --ui:"SF Pro Text",-apple-system,BlinkMacSystemFont,"Manrope",system-ui,sans-serif;
@@ -24,10 +27,11 @@
 }
 *,*::before,*::after{box-sizing:border-box}
 [hidden]{display:none!important}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:72px}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:84px}
 body{margin:0;background:var(--carbon);color:var(--carbon);font:400 16px/1.5 var(--ui);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 img{display:block;max-width:100%}
-a{color:inherit}
+a{color:inherit;text-underline-offset:.18em;text-decoration-thickness:1px}
+a[href^="tel:"],a[href^="mailto:"]{padding-block:12px;margin-block:-12px}
 button,input,select,textarea{font:inherit;color:inherit}
 .sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .skip{position:fixed;left:var(--m);top:-60px;z-index:100;background:var(--hot);color:var(--carbon);padding:10px 16px;border-radius:999px;text-decoration:none}
@@ -35,10 +39,10 @@ button,input,select,textarea{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--carbon);outline-offset:2px;box-shadow:0 0 0 4px var(--frost)}
 
 /* type roles: one display weight, one serif weight, one UI face */
-.d{font-family:var(--display);font-weight:400;letter-spacing:-.03em;line-height:.92;text-wrap:balance;margin:0}
+.d{font-family:var(--display);font-weight:400;letter-spacing:-.03em;line-height:1;text-wrap:balance;margin:0}
 .d-xl{font-size:clamp(42px,6.1vw,92px)}
 .d-l{font-size:clamp(36px,4.6vw,68px)}
-.d-m{font-size:clamp(28px,2.9vw,42px);letter-spacing:-.025em;line-height:1}
+.d-m{font-size:clamp(28px,2.9vw,42px);letter-spacing:-.025em;line-height:1.05}
 .s{font-family:var(--serif);font-weight:300;font-optical-sizing:auto;margin:0;text-wrap:pretty}
 .s-l{font-size:clamp(22px,2.1vw,30px);line-height:1.3;letter-spacing:-.005em}
 .s-m{font-size:clamp(18px,1.45vw,21px);line-height:1.45}
@@ -53,9 +57,9 @@ button,input,select,textarea{font:inherit;color:inherit}
 .hdr.solid{background:color-mix(in srgb,var(--frost) 100%,transparent)}
 .hdr.solid.dark{background:color-mix(in srgb,var(--carbon) 100%,transparent)}
 /* brand: the lintel alone over the hero (the giant logotype is the name there), the full lockup once past it */
-.brand{display:block;height:38px}
+.brand{display:block;height:44px}
 .brand svg{height:100%;width:auto;display:block}
-.brand .b-mark{height:30px;margin:4px 0}
+.brand .b-mark{height:34px;margin:5px 0}
 .brand .b-full,.hdr.scrolled .brand .b-mark{display:none}
 .hdr.scrolled .brand .b-full{display:block;animation:fadein .35s}
 @keyframes fadein{from{opacity:0}}
@@ -79,7 +83,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(20,22,24,.78),rgba(20,22,24,.3) 38%,rgba(20,22,24,0) 60%),linear-gradient(to bottom,rgba(20,22,24,.55),rgba(20,22,24,0) 32%);pointer-events:none}
 .hero h1{position:absolute;z-index:2;left:var(--m);right:var(--m);bottom:var(--m);margin:0}
 .hero h1 svg{display:block;width:100%;height:auto;color:var(--frost)}
-.hero-top{position:absolute;z-index:2;left:var(--m);right:var(--m);top:88px;display:flex;justify-content:space-between;align-items:flex-start;gap:24px}
+.hero-top{position:absolute;z-index:2;left:var(--m);right:var(--m);top:100px;display:flex;justify-content:space-between;align-items:flex-start;gap:24px}
 .hero-top .s{max-width:23ch;color:var(--frost)}
 .hero-meta{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
 .hero-meta .cap{margin:0;font:400 12px/1.3 var(--ui);color:var(--frost);opacity:.85}
@@ -87,7 +91,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .motion:hover{border-color:var(--frost)}
 .motion i{width:8px;height:10px;border-left:2px solid currentColor;border-right:2px solid currentColor}
 .paused .motion i{border:0;border-left:8px solid currentColor;border-top:5px solid transparent;border-bottom:5px solid transparent;height:0;width:0}
-.caption{position:absolute;z-index:2;font:400 12px/1.3 var(--ui);color:var(--frost);background:rgba(20,22,24,.72);padding:5px 8px;border-radius:4px}
+.caption{position:absolute;z-index:2;top:var(--m);right:var(--m);font:400 12px/1.3 var(--ui);color:var(--frost);background:rgba(20,22,24,.86);padding:5px 8px;border-radius:4px}
 
 /* load-in: logotype rises from its baseline */
 @media (prefers-reduced-motion:no-preference){
@@ -98,50 +102,64 @@ button,input,select,textarea{font:inherit;color:inherit}
 }
 
 /* bands: one flat colour each, equal padding, head top-left, body low right */
-.band{position:relative;padding:var(--band);display:grid;grid-template-columns:repeat(12,1fr);column-gap:24px;align-content:start;row-gap:40px}
+.band{position:relative;padding:var(--band);display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--sp-5);align-content:start;row-gap:var(--head-gap)}
 .band>.head{grid-column:1/span 10}
-.band>.body{grid-column:1/span 7;max-width:60ch}
-.band>.body .s+.s,.band>.body .s+.link{margin-top:20px}
+.band>.aside{grid-column:1/span 5;align-self:start}
+.band>.body{grid-column:7/span 6;max-width:60ch}
+.band>.body-l{grid-column:1/span 6}
+.band>.body .s+.s,.band>.body .s+.link{margin-top:var(--sp-5)}
+.band>.aside .ui-s{margin-top:var(--sp-3)}
+.band>.aside .sub+.stats{margin-top:var(--sp-6)}
+.stats{list-style:none;margin:0;padding:0;display:grid;gap:var(--sp-5);max-width:34ch}
+.stats li{border-top:1px solid currentColor;padding-top:var(--sp-3)}
+.stats b{display:block;font-weight:400;margin-bottom:var(--sp-2)}
+.stats li>span{display:block}
+.band>.sub.aside,.band>.aside>.sub:first-child{margin-top:0}
+.band:has(>.aside)>.aside,.band:has(>.aside)>.body{grid-row:2;align-self:baseline}
 .frost{background:var(--frost);color:var(--carbon)}
 .titanium{background:var(--titanium);color:var(--carbon)}
 .carbon{background:var(--carbon);color:var(--frost)}
 .hot{background:var(--hot);color:var(--carbon)}
 
 /* finder */
-.find{min-height:0;row-gap:40px;align-content:start}
+.find{min-height:0;align-content:start}
 .find .head{grid-column:1/-1;font-size:clamp(28px,2.9vw,40px)}
 .find form{grid-column:1/-1;display:flex;align-items:flex-end;gap:16px;border-bottom:1px solid var(--carbon);padding-bottom:8px}
 .find label.sr+input{flex:1}
-.find input{flex:1;min-width:0;border:0;background:transparent;font-family:var(--display);font-weight:400;letter-spacing:-.03em;font-size:clamp(34px,5vw,76px);line-height:1.05;padding:0;outline:none}
+.find input{flex:1;min-width:0;border:0;background:transparent;font-family:var(--display);font-weight:400;letter-spacing:-.03em;font-size:clamp(34px,5vw,76px);line-height:1.25;padding:0;outline:none}
 .find input::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none}
 .find input::placeholder{color:#6B7277}
 .find form:focus-within{border-bottom-color:var(--hot);box-shadow:0 1px 0 0 var(--hot)}
 .go{flex:none;width:56px;height:56px;border-radius:999px;border:0;background:var(--carbon);color:var(--frost);cursor:pointer;display:grid;place-items:center;font-size:22px;transition:background-color .2s}
 .go:hover{background:var(--hot);color:var(--carbon)}
-.picks{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px 8px;align-items:center;margin:-16px 0 0;padding:0;list-style:none}
+.picks{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:var(--sp-2);align-items:center;margin:calc(var(--sp-5) - var(--head-gap)) 0 0;padding:0;list-style:none}
 .picks span{font:400 14px/1 var(--ui);color:var(--ink-2);margin-right:8px}
 .picks button{font:500 14px/1 var(--ui);background:transparent;border:1px solid rgba(20,22,24,.28);border-radius:999px;padding:10px 14px;min-height:40px;cursor:pointer;transition:background-color .2s,border-color .2s}
 .picks button:hover,.picks button[aria-pressed=true]{background:var(--carbon);color:var(--frost);border-color:var(--carbon)}
 .results{grid-column:1/-1}
 .results:empty{display:none}
-.results .meta{display:flex;justify-content:space-between;gap:16px;font:400 14px/1.4 var(--ui);color:var(--ink-2);padding:0 0 12px}
+.results .meta{display:flex;justify-content:space-between;gap:var(--sp-4);font:400 14px/1.4 var(--ui);color:var(--ink-2);padding:0 0 12px}
 .results ol{list-style:none;margin:0;padding:0}
-.results li{display:grid;grid-template-columns:5fr 7fr;gap:24px;padding:20px 0;border-top:1px solid rgba(20,22,24,.18);align-items:baseline}
+.results li,.none{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--sp-5);row-gap:var(--sp-2)}
+.results li>:first-child,.none>:first-child{grid-column:1/span 6}
+.results li>:last-child,.none>:last-child{grid-column:7/span 6;max-width:60ch}
+.results li{padding:20px 0;border-top:1px solid rgba(20,22,24,.18);align-items:baseline}
 .results li:last-child{border-bottom:1px solid rgba(20,22,24,.18)}
 .results .n{font-family:var(--display);font-size:clamp(24px,2.3vw,32px);letter-spacing:-.025em;line-height:1}
 .results mark{background:none;color:inherit;box-shadow:inset 0 -.32em 0 rgba(218,111,42,.45)}
-.none{padding:28px 0;border-top:1px solid rgba(20,22,24,.18);display:grid;grid-template-columns:5fr 7fr;gap:24px}
+.none{padding:28px 0;border-top:1px solid rgba(20,22,24,.18)}
+.results .prompt{margin:0;color:var(--ink-2)}
 .none p{margin:0}
 
 /* split band with image bleeding to the edge */
-.split{display:grid;grid-template-columns:1fr 1fr;min-height:820px}
-.split .txt{padding:var(--band);display:flex;flex-direction:column;justify-content:space-between;gap:64px}
-.split figure{margin:0;position:relative;overflow:hidden}
-.split figure img{width:100%;height:100%;object-fit:cover}
-.split figure .caption{left:var(--m);bottom:var(--m)}
+.split{display:grid;grid-template-columns:1fr 1fr}
+.split .txt{padding:var(--band);display:flex;flex-direction:column;gap:var(--head-gap)}
+.split .txt .s{max-width:60ch}
+.split figure{margin:0;position:relative;overflow:hidden;min-height:min(50vw,720px)}
+.split figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .num{display:block;font-size:clamp(88px,14.4vw,212px);line-height:.84;letter-spacing:-.045em;margin-left:-.04em}
-.numsub{display:block;margin-top:24px}
-.sub{margin-top:24px;max-width:34ch}
+.numsub{display:block;margin-top:var(--sp-5)}
+.sub{margin-top:var(--sp-5);max-width:34ch}
 
 /* image bands */
 .photo{position:relative;min-height:860px;overflow:hidden;color:var(--frost);display:flex;flex-direction:column;justify-content:space-between;padding:var(--band)}
@@ -150,47 +168,52 @@ button,input,select,textarea{font:inherit;color:inherit}
 .photo>*:not(picture){position:relative;z-index:1}
 .photo::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to top,rgba(20,22,24,.7),rgba(20,22,24,0) 55%)}
 .photo .caption{position:static;align-self:flex-end}
-.photo .low{display:grid;grid-template-columns:repeat(12,1fr);column-gap:24px;row-gap:24px;align-items:end}
+.photo .low>.link{justify-self:start}
+.photo .low{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--sp-5);row-gap:var(--head-gap);align-items:end}
 .photo .low>*{grid-column:1/span 9}
-.photo .low>.s{grid-column:1/span 5}
+.photo .low>.s{grid-column:1/span 6;max-width:60ch}
 #careers .low>.jobs{grid-column:1/span 8}
 #careers::before{background:linear-gradient(to top,rgba(20,22,24,.92),rgba(20,22,24,.7) 55%,rgba(20,22,24,.25) 85%)}
-#cold::before{background:linear-gradient(to top,rgba(20,22,24,.88),rgba(20,22,24,.55) 40%,rgba(20,22,24,0) 70%)}
+#cold::before{background:linear-gradient(to top,rgba(20,22,24,.92),rgba(20,22,24,.74) 45%,rgba(20,22,24,0) 75%)}
 
 .wide{margin:0;position:relative;height:min(46vw,680px);overflow:hidden}
 .herc img{object-position:50% 40%;filter:contrast(1.05)}
 .wide img{width:100%;height:116%;object-fit:cover;position:absolute;top:-8%}
-.wide .caption{left:var(--m);bottom:var(--m)}
 
 /* rows (events, occupations) */
 .rows{grid-column:1/-1;list-style:none;margin:0;padding:0}
 .rows li{border-top:1px solid currentColor}
 .rows li:last-child{border-bottom:1px solid currentColor}
-.rows a{display:grid;grid-template-columns:3fr 6fr 3fr;gap:24px;align-items:baseline;padding:28px 0;text-decoration:none}
+.rows a{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--sp-5);row-gap:var(--sp-3);align-items:baseline;padding:var(--sp-6) 0;text-decoration:none}
 .rows .what{transition:transform .35s var(--ease)}
 .rows a:hover .what{transform:translateX(12px)}
-.rows .when{font:500 15px/1.3 var(--ui)}
+.rows .when{font:500 15px/1.3 var(--ui);grid-column:1/span 3}
+.rows .what{grid-column:4/span 6}
+.rows .why{grid-column:10/span 3}
 .rows .what{font-family:var(--display);font-size:clamp(30px,3.6vw,56px);letter-spacing:-.03em;line-height:.95}
 .rows .why{font-family:var(--serif);font-weight:300;font-size:18px;line-height:1.4}
-.rows .why b{display:block;font:500 15px/1.3 var(--ui);margin-top:12px}
+.rows .why b{display:flex;width:fit-content;gap:.5em;font:500 15px/1.3 var(--ui);margin-top:var(--sp-3);padding:6px 0;border-bottom:1px solid currentColor;transition:gap .3s var(--ease)}
+.rows a:hover .why b{gap:.8em}
 
-.jobs{list-style:none;margin:0;padding:0;columns:2;column-gap:24px}
-.jobs li{break-inside:avoid;border-top:1px solid rgba(229,235,239,.5)}
+.jobs{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(4,auto);grid-auto-flow:column;column-gap:var(--sp-5)}
+.jobs li{border-bottom:1px solid rgba(229,235,239,.5)}
+.jobs li:nth-child(1),.jobs li:nth-child(5){border-top:1px solid rgba(229,235,239,.5)}
 .jobs a{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:12px 0 14px;text-decoration:none;font-family:var(--display);font-size:clamp(22px,1.95vw,28px);letter-spacing:-.02em;line-height:1.1}
 .jobs a::after{content:"\2192";font-size:.7em;opacity:0;transform:translateX(-6px);transition:opacity .25s,transform .25s var(--ease)}
 .jobs a:hover::after,.jobs a:focus-visible::after{opacity:1;transform:none}
 
 /* members + join */
-.join{min-height:0;row-gap:72px}
+.join{min-height:0}
 .join .head{grid-column:1/span 11}
-.members{grid-column:1/span 7;grid-row:3}
-.members h3{font:500 14px/1.3 var(--ui);margin:0 0 16px}
-.members ul{list-style:none;margin:0;padding:0;columns:1;column-gap:24px;font:400 15px/1.6 var(--ui)}
+.members{grid-column:1/span 6;grid-row:3}
+.members h3{font:500 14px/1.3 var(--ui);margin:0 0 var(--sp-4)}
+.members ul{list-style:none;margin:0;padding:0;columns:1;column-gap:var(--sp-5);font:400 15px/1.6 var(--ui)}
+.members li{padding-left:1em;text-indent:-1em}
 .members li{break-inside:avoid}
-.tiers{grid-column:1/span 7;grid-row:2;display:grid;grid-template-columns:1fr 1fr;gap:24px}
-.tiers h3{margin:0 0 10px}
+.tiers{grid-column:1/span 6;grid-row:2;display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-5)}
+.tiers h3{margin:0 0 var(--sp-3);font-size:clamp(26px,2.3vw,34px)}
 .form{grid-column:9/span 4;grid-row:2/span 2;align-self:start}
-.f{margin:0 0 20px}
+.f{margin:0 0 var(--sp-5)}
 .f label,.f legend{display:block;font:500 14px/1.3 var(--ui);margin:0 0 8px}
 .f .opt{font-weight:400;color:var(--ink-2)}
 .f input,.f select,.f textarea{width:100%;border:0;border-bottom:1px solid var(--carbon);background:transparent;padding:10px 0;font:400 17px/1.4 var(--ui);border-radius:0;outline:none}
@@ -208,7 +231,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .done address{font:400 15px/1.5 var(--ui);font-style:normal}
 
 /* footer */
-footer{background:var(--carbon);color:var(--frost);padding:var(--band);display:grid;grid-template-columns:repeat(12,1fr);column-gap:24px;row-gap:64px}
+footer{background:var(--carbon);color:var(--frost);padding:var(--band);display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--sp-5);row-gap:var(--sp-8)}
 footer .col{grid-column:span 3;font:400 15px/1.6 var(--ui)}
 footer .col h2{font:500 14px/1.3 var(--ui);color:var(--titanium);margin:0 0 12px}
 footer .col ul{list-style:none;margin:0;padding:0}
@@ -224,7 +247,9 @@ footer .legal{grid-column:1/-1;display:flex;justify-content:space-between;gap:24
 .menu.open{visibility:visible;opacity:1}
 .menu .top{display:flex;justify-content:space-between;align-items:center}
 .menu .top .brand .b-mark{display:none}.menu .top .brand .b-full{display:block}
-.menu .cols{display:grid;grid-template-columns:7fr 5fr;gap:24px;align-content:center;padding:48px 0}
+.menu .cols{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--sp-5);row-gap:var(--sp-6);align-content:center;padding:var(--sp-7) 0}
+.menu .cols>:first-child{grid-column:1/span 6}
+.menu .cols>:last-child{grid-column:7/span 6}
 .menu .primary{list-style:none;margin:0;padding:0}
 .menu .primary a{display:block;text-decoration:none;font-family:var(--display);font-size:clamp(36px,5vw,72px);letter-spacing:-.03em;line-height:1.02;padding:2px 0;transition:color .2s,transform .35s var(--ease)}
 .menu .primary a:hover{color:var(--hot);transform:translateX(12px)}
@@ -239,6 +264,7 @@ footer .legal{grid-column:1/-1;display:flex;justify-content:space-between;gap:24
   .menu.open .primary li{opacity:1;transform:none}
   .menu.open .primary li:nth-child(2){transition-delay:.04s}.menu.open .primary li:nth-child(3){transition-delay:.08s}.menu.open .primary li:nth-child(4){transition-delay:.12s}.menu.open .primary li:nth-child(5){transition-delay:.16s}.menu.open .primary li:nth-child(6){transition-delay:.2s}.menu.open .primary li:nth-child(7){transition-delay:.24s}.menu.open .primary li:nth-child(8){transition-delay:.28s}
 }
+@media (hover:none){.menu .foot{visibility:hidden}}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .hero .bg img{animation:none}
@@ -246,24 +272,28 @@ footer .legal{grid-column:1/-1;display:flex;justify-content:space-between;gap:24
 }
 
 @media (min-width:600px){.members ul{columns:2}}
-@media (min-width:1100px){.members ul{columns:3}}
+@media (min-width:1600px){.members ul{columns:3}}
 /* tablet and phone */
 @media (max-width:900px){
-  .band>.head,.band>.body{grid-column:1/-1}
+  .band>.head,.band>.body,.band>.aside{grid-column:1/-1}
+  .band:has(>.aside)>.aside,.band:has(>.aside)>.body{grid-row:auto}
   .split{grid-template-columns:1fr}
   .split figure{height:62vw;min-height:320px}
   .photo .low>*,.photo .low>.s{grid-column:1/-1}
   .join .head,.members,.tiers,.form{grid-column:1/-1;grid-row:auto}
-  .rows a{grid-template-columns:1fr;gap:10px}
+  .rows a{grid-template-columns:1fr;row-gap:10px}
+  .rows a>*{grid-column:1/-1!important}
   footer .col{grid-column:span 6}
-  .menu .cols{grid-template-columns:1fr;align-content:start;gap:32px}
+  .menu .cols{align-content:start}
+  .menu .cols>*{grid-column:1/-1!important}
 }
 @media (max-width:600px){
-  :root{--m:16px;--band:16px}
+  :root{--m:16px;--band-y:64px;--head-gap:var(--sp-6)}
   body{font-size:16px}
   .hdr{padding:12px var(--m)}
   .hdr .ghost.join-l{display:none}
-  .hdr.scrolled .brand .b-mark{display:block}.hdr.scrolled .brand .b-full{display:none}
+  .brand{height:26px}
+  .brand .b-mark{height:26px;margin:0}
   .menu .top .brand{height:30px}
   .hdr nav{gap:2px}
   .hdr .ghost{padding:12px 8px}
@@ -272,20 +302,23 @@ footer .legal{grid-column:1/-1;display:flex;justify-content:space-between;gap:24
   .hero-top{top:72px;flex-direction:column;gap:14px}
   .hero-meta{align-items:flex-start}
   .hero-top .s{font-size:21px}
-  .band{min-height:0;row-gap:56px}
-  .find{row-gap:28px}
+  .band{min-height:0}
   .find input{font-size:32px}
   .go{width:48px;height:48px}
-  .picks{margin-top:-8px}
-  .picks span{width:100%}
-  .results li,.none{grid-template-columns:1fr;gap:8px}
+  .picks{margin-top:calc(var(--sp-4) - var(--head-gap));flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:calc(-1 * var(--m));padding:0 var(--m) 2px}
+  .picks::-webkit-scrollbar{display:none}
+  .picks>*{flex:none}
+  .results li>*,.none>*{grid-column:1/-1!important}
   .photo{min-height:640px}
-  .split .txt{gap:40px}
+  .split .txt{gap:var(--sp-7)}
   .wide{height:68vw}
-  .jobs{columns:1}
+  .jobs{grid-template-columns:1fr;grid-template-rows:none;grid-auto-flow:row}
+  .jobs li:nth-child(5){border-top:0}
   #careers .low>.jobs{grid-column:1/-1}
   #careers::before{background:linear-gradient(to top,rgba(20,22,24,.94),rgba(20,22,24,.8) 70%,rgba(20,22,24,.45))}
   .tiers{grid-template-columns:1fr}
+  .members ul{font-size:14px}
+  footer{row-gap:var(--sp-6)}
   footer .col{grid-column:1/-1}
   footer .legal{flex-direction:column}
 }
@@ -374,9 +407,16 @@ footer .legal{grid-column:1/-1;display:flex;justify-content:space-between;gap:24
 </section>
 
 <section class="band titanium" id="industry" data-theme="light" aria-labelledby="ind-h">
-  <div class="head rv"><h2 class="d d-xl" id="ind-h">Canada's <span class="nw">third-largest</span> aerospace&nbsp;cluster.</h2><p class="s s-l sub">And the largest in Western Canada.</p></div>
+  <h2 class="d d-xl head rv" id="ind-h">Canada's <span class="nw">third-largest</span> aerospace&nbsp;cluster.</h2>
+  <div class="aside rv">
+    <p class="s s-l sub">And the largest in Western Canada.</p>
+    <ul class="stats">
+      <li><b class="d d-m">1,500</b><span class="ui-s">StandardAero people across eight Winnipeg facilities.</span></li>
+      <li><b class="d d-m">43</b><span class="ui-s">Member and associate member profiles, from global primes to specialist shops, colleges, agencies and <span class="nw">not-for-profits</span>.</span></li>
+    </ul>
+  </div>
   <div class="body rv">
-    <p class="s s-m">StandardAero overhauls engines for airlines and the RCAF here, with 1,500 people across eight Winnipeg facilities and a 70,000 sq ft expansion that opened in September 2026. Magellan machines fighter engine components and builds Black Brant rockets. GE runs an engine research and test centre in Winnipeg, and SkyAlyne trains the RCAF's future aircrew from Winnipeg and Southport. The association's 43 member and associate member profiles run from global primes to specialist shops, colleges, agencies and <span class="nw">not-for-profits</span>.</p>
+    <p class="s s-m">StandardAero overhauls engines for airlines and the RCAF here, with a <span class="nw">70,000 sq ft</span> expansion that opened in <span class="nw">September 2026</span>. Magellan machines fighter engine components and builds Black Brant rockets. GE runs an engine research and test centre in Winnipeg, and SkyAlyne trains the RCAF's future aircrew from Winnipeg and Southport.</p>
     <a class="link" href="stub.html?p=Aerospace%20in%20Manitoba">Aerospace in Manitoba <span aria-hidden="true">&#8594;</span></a>
   </div>
 </section>
@@ -387,9 +427,10 @@ footer .legal{grid-column:1/-1;display:flex;justify-content:space-between;gap:24
     <figcaption class="caption">RCAF Hercules on a winter ramp, archive photo. <span class="nw">Stand-in</span>.</figcaption>
   </figure>
   <div class="band">
-    <div class="head rv"><h2 class="d d-xl" id="def-h">The RCAF's operations are run from&nbsp;Winnipeg.</h2><p class="s s-l sub">So is the Canadian NORAD Region.</p></div>
+    <h2 class="d d-xl head rv" id="def-h">The RCAF's operations are run from&nbsp;Winnipeg.</h2>
+    <p class="s s-l sub aside rv">So is the Canadian NORAD Region.</p>
     <div class="body rv">
-      <p class="s s-m">1 Canadian Air Division and the Canadian NORAD Region are headquartered at CFB Winnipeg, 17 Wing. With CFB Shilo and the Southport Aerospace Centre, Manitoba is where Canada's air defence is commanded and its aircrew trained, and where the suppliers that keep it flying already work.</p>
+      <p class="s s-m">1 Canadian Air Division and the Canadian NORAD Region are headquartered at CFB Winnipeg, <span class="nw">17 Wing</span>. With CFB Shilo and the Southport Aerospace Centre, Manitoba is where Canada's air defence is commanded and its aircrew trained, and where the suppliers that keep it flying already work.</p>
     </div>
   </div>
 </section>
@@ -398,7 +439,7 @@ footer .legal{grid-column:1/-1;display:flex;justify-content:space-between;gap:24
   <div class="txt">
     <h2 class="d rv" id="inv-h"><span class="num">$19.5M</span><span class="d-m numsub">in federal defence investment in Winnipeg, April&nbsp;2026.</span></h2>
     <div class="rv">
-      <p class="s s-m">Three Winnipeg projects. $8M for Magellan's advanced machining centre, making F404 and F414 engine parts for the Super Hornet, the Growler and the Gripen. $8M for StandardAero to expand engine work for the RCAF's <span class="nw">CC-130H</span>, <span class="nw">CC-130J</span> and <span class="nw">CP-140</span>, and the <span class="nw">P-8A</span> Poseidon once it is in service. $3.5M for <span class="nw">Win-Shield</span> Devices. More than 150 jobs created and 100 kept.</p>
+      <p class="s s-m">Three Winnipeg projects. $8M for Magellan's advanced machining centre, making F404 and F414 engine parts for the Super Hornet, the Growler and the Gripen. $8M for StandardAero to expand engine work for the RCAF's <span class="nw">CC-130H</span>, <span class="nw">CC-130J</span> and <span class="nw">CP-140</span>, and the <span class="nw">P-8A</span> Poseidon once it is in service. $3.5M for <span class="nw">Win-Shield</span> Devices. More than <span class="nw">150 jobs</span> created and <span class="nw">100 kept</span>.</p>
     </div>
   </div>
   <figure>
@@ -415,16 +456,18 @@ footer .legal{grid-column:1/-1;display:flex;justify-content:space-between;gap:24
   <p class="caption">Hoar frost crystals. <span class="nw">Stand-in</span> photo.</p>
   <div class="low">
     <h2 class="d d-xl rv" id="cold-h">Jet engines are proven in Manitoba's cold.</h2>
-    <p class="s s-m rv">GLACIER, in Thompson, is run by <span class="nw">Rolls-Royce</span> and Pratt &amp; Whitney with the National Research Council. It tests engines of up to 150,000 lbf thrust in natural icing weather. MDs AeroTest, which built it with the NRC, and EnviroTREC, its <span class="nw">not-for-profit</span> partner, are both members.</p>
+    <p class="s s-m rv">GLACIER, in Thompson, is run by <span class="nw">Rolls-Royce</span> and <span class="nw">Pratt &amp; Whitney</span> with the National Research Council. It tests engines of up to <span class="nw">150,000 lbf</span> thrust in natural icing weather. <span class="nw">MDs AeroTest</span>, which built it with the NRC, and EnviroTREC, its <span class="nw">not-for-profit</span> partner, are both members.</p>
   </div>
 </section>
 
 <section class="band frost" id="alliance" data-theme="light" aria-labelledby="all-h">
   <h2 class="d d-xl head rv" id="all-h">One door into Manitoba's defence supply chain.</h2>
   <div class="body rv">
-    <p class="s s-m">The <span class="nw">Manitoba-Canada</span> Defence Alliance launched on September 8, 2026, joining government, industry, <span class="nw">post-secondary</span>, the Canadian Armed Forces and Indigenous partners, with a dedicated defence lead based at the association. Alongside it, the Manitoba Defence and <span class="nw">Dual-Use</span> Innovation Bridge, over $3.8M across two years, prepares 100 Manitoba SMEs for defence work: cyber, controlled goods, <span class="nw">dual-use</span> products and procurement.</p>
+    <p class="s s-m">The <span class="nw">Manitoba-Canada</span> Defence Alliance launched on <span class="nw">September 8, 2026</span>, joining government, industry, <span class="nw">post-secondary</span>, the Canadian Armed Forces and Indigenous partners, with a dedicated defence lead based at the association. Alongside it, the Manitoba Defence and <span class="nw">Dual-Use</span> Innovation Bridge, over $3.8M across two years, prepares <span class="nw">100 Manitoba</span> SMEs for defence work: cyber, controlled goods, <span class="nw">dual-use</span> products and procurement.</p>
+  </div>
+  <div class="aside rv">
     <p class="s"><a class="link" href="#join" data-reason="Defence supply chain">Talk to the defence lead <span aria-hidden="true">&#8594;</span></a></p>
-    <p class="ui-s" style="margin-top:12px">Or call <a href="tel:+12042722957"><span class="nw">204-272-2957</span></a> and ask for the defence lead.</p>
+    <p class="ui-s">Or call <a href="tel:+12042722957"><span class="nw">204-272-2957</span></a> and ask for the defence lead.</p>
   </div>
 </section>
 
@@ -435,8 +478,8 @@ footer .legal{grid-column:1/-1;display:flex;justify-content:space-between;gap:24
   </figure>
   <div class="band">
     <h2 class="d d-l head rv" id="com-h">Boeing has built composite parts in Winnipeg since 1971.</h2>
-    <div class="body rv">
-      <p class="s s-m">Canada's largest aerospace composite plant, about 1,500 people, and a C$20M expansion that opened in June 2025.</p>
+    <div class="body body-l rv">
+      <p class="s s-m">Canada's largest aerospace composite plant, <span class="nw">about 1,500</span> people, and a C$20M expansion that opened in <span class="nw">June 2025</span>.</p>
     </div>
   </div>
 </section>
@@ -458,20 +501,21 @@ footer .legal{grid-column:1/-1;display:flex;justify-content:space-between;gap:24
       <li><a href="stub.html?p=Tool%20and%20die%20maker">Tool and die maker</a></li>
       <li><a href="stub.html?p=Welder">Welder</a></li>
     </ul>
-    <p class="s s-m rv">Every May, AAiM Day brings about 700 Grade 6 students to RRC Polytech's Stevenson Campus to meet the industry. <a href="stub.html?p=Job%20postings">See job postings</a>.</p>
+    <p class="s s-m rv">Every May, AAiM Day brings <span class="nw">about 700</span> <span class="nw">Grade 6</span> students to RRC Polytech's Stevenson Campus to meet the industry.</p>
+    <a class="link rv" href="stub.html?p=Job%20postings">See job postings <span aria-hidden="true">&#8594;</span></a>
   </div>
 </section>
 
-<section class="band titanium" id="events" data-theme="light" aria-labelledby="ev-h" style="min-height:0">
+<section class="band titanium" id="events" data-theme="light" aria-labelledby="ev-h">
   <h2 class="d d-l head rv" id="ev-h">Coming up.</h2>
   <ul class="rows rv">
     <li><a href="stub.html?p=All-Stars%20Awards%20Dinner">
-      <span class="when">Thursday, November 26, 2026</span>
+      <span class="when">Thursday, <span class="nw">November 26,</span> 2026</span>
       <span class="what"><span class="nw">All-Stars</span> Awards Dinner</span>
       <span class="why">The industry's annual night for its people and companies, from innovation to leadership.<b>Register or sponsor &#8594;</b></span>
     </a></li>
     <li><a href="stub.html?p=Defending%20Canada%3A%20From%20Space%20to%20Ground">
-      <span class="when">February 23 to 24, 2027</span>
+      <span class="when"><span class="nw">February 23 to 24,</span> 2027</span>
       <span class="what">Defending Canada: From Space to Ground</span>
       <span class="why">RBC Convention Centre, Winnipeg. With the University of Manitoba, 1 Canadian Air Division and the Canadian NORAD Region.<b>See the program &#8594;</b></span>
     </a></li>
@@ -480,9 +524,6 @@ footer .legal{grid-column:1/-1;display:flex;justify-content:space-between;gap:24
 
 <section class="band frost join" id="members" data-theme="light" aria-labelledby="join">
   <h2 class="d d-xl head rv" id="join">Join Manitoba's aerospace and defence industry.</h2>
-  <div class="members rv" id="member-list">
-    <h3>Members and associate members include</h3><ul><li>A.Adams Supply</li><li>Aero Recip</li><li>APB Tool Control</li><li>Argus Industries</li><li>Babcock Canada</li><li>Boeing Winnipeg</li><li>BDC</li><li>Cadorath</li><li>Canadian Propeller</li><li>Castellan Information Security Services</li><li>Collins Aerospace</li><li>Dimatec</li><li>Elasto Proxy</li><li>Encore Metals</li><li>Enduron</li><li>EnviroTREC</li><li>Fast Air Executive Aviation Services</li><li>GE Aviation Canada</li><li>KF Aerospace</li><li>Magellan</li><li>Mark=1T Consulting</li><li>MDs AeroTest</li><li>MicroPilot</li><li>NETES</li><li>PAL Aerospace</li><li>Precision ADM</li><li>Propworks Propeller Systems</li><li>Red River College Polytech</li><li>Royal Aviation Museum of Western Canada</li><li>RT Logistix</li><li>SkyAlyne</li><li>Southport Aerospace Centre</li><li>StandardAero</li><li>TABAQ Smart Aerotech Manufacturing</li><li>United Aero Group</li><li>University of Manitoba</li><li>Vaayo Vision Consulting</li><li>Vidir Solutions</li><li>WestCaRD</li><li>Winnipeg Airports Authority</li><li>Winnipeg Economic Development and Tourism</li><li>World Trade Centre Winnipeg</li></ul>
-  </div>
   <div class="tiers rv">
     <div><h3 class="d d-m">Member</h3><p class="s s-m">For companies in research and development, manufacturing, MRO, training and IT. Eligible for training supports and a seat on the board.</p></div>
     <div><h3 class="d d-m">Associate member</h3><p class="s s-m">For supporters of the industry: government, agencies and <span class="nw">not-for-profits</span>.</p></div>
@@ -506,6 +547,9 @@ footer .legal{grid-column:1/-1;display:flex;justify-content:space-between;gap:24
       <address>5 Donald Street, Unit 440, Winnipeg, Manitoba R3L 2T4<br><a href="tel:+12042722957"><span class="nw">204-272-2957</span></a> &middot; <a href="mailto:info@mbaerospace.ca">info@mbaerospace.ca</a></address>
       <p class="after">Concept mockup: nothing was sent.</p>
     </div>
+  </div>
+  <div class="members rv" id="member-list">
+    <h3>Members and associate members include</h3><ul><li>A.Adams Supply</li><li>Aero Recip</li><li>APB Tool Control</li><li>Argus Industries</li><li>Babcock Canada</li><li>Boeing Winnipeg</li><li>BDC</li><li>Cadorath</li><li>Canadian Propeller</li><li>Castellan Information Security Services</li><li>Collins Aerospace</li><li>Dimatec</li><li>Elasto Proxy</li><li>Encore Metals</li><li>Enduron</li><li>EnviroTREC</li><li>Fast Air Executive Aviation Services</li><li>GE Aviation Canada</li><li>KF Aerospace</li><li>Magellan</li><li>Mark=1T Consulting</li><li>MDs AeroTest</li><li>MicroPilot</li><li>NETES</li><li>PAL Aerospace</li><li>Precision ADM</li><li>Propworks Propeller Systems</li><li>Red River College Polytech</li><li>Royal Aviation Museum of Western Canada</li><li>RT Logistix</li><li>SkyAlyne</li><li>Southport Aerospace Centre</li><li>StandardAero</li><li>TABAQ Smart Aerotech Manufacturing</li><li>United Aero Group</li><li>University of Manitoba</li><li>Vaayo Vision Consulting</li><li>Vidir Solutions</li><li>WestCaRD</li><li>Winnipeg Airports Authority</li><li>Winnipeg Economic Development and Tourism</li><li>World Trade Centre Winnipeg</li></ul>
   </div>
 </section>
 </main>
@@ -592,23 +636,24 @@ const STOP=new Set(['and','the','of','a','in','for','weather','to','with','servi
 const res=d.getElementById('results'), q=d.getElementById('q'), picks=[...d.querySelectorAll('.picks button')];
 const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function terms(s){return s.toLowerCase().replace(/[^a-z0-9= -]/g,' ').split(/\s+/).filter(w=>w&&!STOP.has(w)).map(w=>SYN[w]||w)}
-function run(v){
+function run(v,asked){
   v=v.trim(); picks.forEach(b=>b.setAttribute('aria-pressed',b.dataset.q===v));
-  if(!v){res.innerHTML='';return}
+  if(!v){res.innerHTML=asked?'<p class="prompt s s-m">Type a capability, process or company, or try one of the searches above.</p>':'';return}
   const t=terms(v);
-  const hits=M.map(([n,c,k])=>{const hay=(n+' '+c+' '+k).toLowerCase(); const score=t.filter(w=>hay.includes(w)).length; return {n,c,score}})
+  const rx=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'), re=t.map(w=>new RegExp('\\b'+rx(w)));
+  const hits=M.map(([n,c,k])=>{const hay=(n+' '+c+' '+k).toLowerCase(); const score=re.filter(x=>x.test(hay)).length; return {n,c,score}})
     .filter(h=>h.score>0).sort((x,y)=>y.score-x.score);
   if(!hits.length){
     res.innerHTML=`<div class="meta"><span>No match for &ldquo;${esc(v)}&rdquo;</span><span>Sample data from public member profiles</span></div>
     <div class="none"><p class="d d-m">Not in this sample.</p><p class="s s-m">The full directory covers more members than this demo. Call <a href="tel:+12042722957">204-272-2957</a> or email <a href="mailto:info@mbaerospace.ca">info@mbaerospace.ca</a> and the team will find who does it.</p></div>`;
     return}
-  const hl=s=>{let o=esc(s); t.forEach(w=>{if(w.length>2) o=o.replace(new RegExp('('+w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'[a-z]*)','gi'),'<mark>$1</mark>')}); return o};
+  const hl=s=>{let o=esc(s); t.forEach(w=>{if(w.length>2) o=o.replace(new RegExp('\\b('+rx(w)+'[a-z]*)','gi'),'<mark>$1</mark>')}); return o};
   res.innerHTML=`<div class="meta"><span>${hits.length} ${hits.length===1?'member':'members'} for &ldquo;${esc(v)}&rdquo;</span><span>Sample data from public member profiles</span></div>
   <ol>${hits.map(h=>`<li><span class="n">${esc(h.n)}</span><span class="s s-m">${hl(h.c)}</span></li>`).join('')}</ol>`;
 }
 if(innerWidth<600) q.placeholder='Composites, cyber';
 let deb; q.addEventListener('input',()=>{clearTimeout(deb);deb=setTimeout(()=>run(q.value),180)});
-d.getElementById('finder').addEventListener('submit',e=>{e.preventDefault();run(q.value)});
+d.getElementById('finder').addEventListener('submit',e=>{e.preventDefault();clearTimeout(deb);run(q.value,true)});
 picks.forEach(b=>b.addEventListener('click',()=>{q.value=b.dataset.q;run(b.dataset.q)}));
 
 /* join and contact form */

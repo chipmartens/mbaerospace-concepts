@@ -126,7 +126,7 @@
     ['University of Manitoba', 'Engineering research, STARLab space research', 'research university engineering space satellite'],
     ['Cadorath', 'Helicopter component repair and overhaul', 'repair overhaul components helicopter mro maintenance'],
   ];
-  const find = $('[data-find]'), q = $('#q'), res = $('.results', find);
+  const find = $('[data-find]'), q = $('#q'), box = $('.results', find), res = $('.results-in', box);
   const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   function search(text) {
     const words = text.toLowerCase().replace(/[^a-z0-9\- ]/g, ' ').split(/\s+/).filter(w => w.length > 1 && !['and', 'the', 'for', 'of', 'in', 'a'].includes(w));
@@ -142,7 +142,7 @@
   find.addEventListener('submit', e => {
     e.preventDefault();
     const text = q.value.trim();
-    if (!text) { q.focus(); res.innerHTML = '<p class="miss">Type a capability, for example engine overhaul, composites or cyber.</p>'; res.classList.add('show'); return; }
+    if (!text) { q.focus(); res.innerHTML = '<p class="miss">Type a capability, for example engine overhaul, composites or cyber.</p>'; box.classList.add('show'); return; }
     const hits = search(text);
     if (hits.length) {
       const top = hits.slice(0, 4);
@@ -151,7 +151,7 @@
     } else {
       res.innerHTML = `<p class="tag">Sample data from member profiles</p><p class="miss">“${esc(text)}” is not in this sample. We can still find you a Manitoba supplier: <a href="#contact" data-reason="Finding a supplier">send us the brief</a> or call <a href="tel:+12042722957">204-272-2957</a>.</p>`;
     }
-    res.classList.add('show');
+    box.classList.add('show');
   });
   q.addEventListener('keydown', e => { if (e.key === 'Escape') closeResults(); });
 
